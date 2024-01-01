@@ -30,6 +30,9 @@ export class FavoritesComponent implements OnInit {
     //console.log(data)
     //})
     
+    firebase_service.readCollection(`users/dummy_user/favorite_recipes`).then((data) => {console.log(data)};)
+      
+
   }
 
 }
