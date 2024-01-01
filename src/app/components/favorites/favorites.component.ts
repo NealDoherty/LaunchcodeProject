@@ -24,10 +24,12 @@ export class FavoritesComponent implements OnInit {
     });
   }
   callFavorites() {
-    const user_id = "dummy_user"
-    firebase_service.readCollection(`users/${user_id}/favorite_recipes`).then((data) => {
-      console.log(data)
-    })
+    //Removed due to user login implementation being incomplete 
+    //const user_id = "dummy_user"
+    //firebase_service.readCollection(`users/${user_id}/favorite_recipes`).then((data) => {
+    //console.log(data)
+    //})
+    
   }
 
 }

@@ -67,7 +67,10 @@ ngOnInit(): void {
   };
 
   async retrievePantry() {
-    this.firebaseReturn = await firebase_service.readCollection(`users/${this.user_id}/pantry`);
+   // this.firebaseReturn = await firebase_service.readCollection(`users/${this.user_id}/pantry`);
+   // Removed due to user login implementation being incomplete 
+
+    this.firebaseReturn = await firebase_service.readCollection(`users/dummy_user/pantry`);
     this.pantryContents = JSON.parse(JSON.stringify(this.firebaseReturn)); //stringify and parse to avoid errors in browser regarding non-interable variables
     this.meatContents = this.pantryContents['meat'].map(x => this.toTitleCase(x));
     this.vegetableContents = this.pantryContents['vegetable'].map(x => this.toTitleCase(x));
