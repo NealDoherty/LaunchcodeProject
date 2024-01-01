@@ -6,13 +6,16 @@ import { User } from 'firebase/auth';
 import { auth } from 'src/firebase/firebase.init';
 
 
+//Consider removing retrieve pantry button?
+//Expand pantry editing, remove items from html display?
+
 @Component({
   selector: 'app-pantry',
   templateUrl: './pantry.component.html',
   styleUrls: ['./pantry.component.scss']
 })
 
-export class PantryComponent {
+export class PantryComponent implements OnInit {
 
   searchTerms: string[] = [];  //formatted search terms derived from selected pantry ingredients
   selectedItems = []; //selected from html form
@@ -38,6 +41,8 @@ export class PantryComponent {
 
   constructor(private router: Router, private searchRecipeService: SearchRecipesService) { }
 
+
+// 1.1.24 ngOnInit called but PantryComponent class does not implement OnInit?
 ngOnInit(): void {
   auth.onAuthStateChanged(user => {
     if(user) {
@@ -45,6 +50,11 @@ ngOnInit(): void {
       this.user_id = user.uid;
     }
   });
+
+ // removed to reduce firebase calls
+ // this.retrievePantry() //Pantry is loaded whenever component is called
+
+
 }
 
   //combines all selected terms together for sequential search where a term will be eleminated in each search

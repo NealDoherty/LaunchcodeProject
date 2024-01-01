@@ -9,29 +9,6 @@ import { firebase_service } from 'src/firebase/firebase.service';
   styleUrls: ['./favorites.component.scss']
 })
 
-export class FavoritesComponent implements OnInit{
-  
-  user: User = null;
-  user_id: string = null;
-
-  constructor() { }
-
-  ngOnInit(): void {
-    auth.onAuthStateChanged(user => {
-      if(user) {
-        this.user = user;
-        this.user_id = user.uid;
-      }
-    });
-  }
-
-  callFavorites() {
-  console.log("what idiot did this?");
-  firebase_service.readCollection(`users/dummy_user/favorite_recipes`).then((data) => {console.log("What idiot did this?" + data)});
-}
-
-}
-/*
 export class FavoritesComponent implements OnInit {
 
   user: User = null;
@@ -60,4 +37,3 @@ export class FavoritesComponent implements OnInit {
   }
 
 }
-*/
