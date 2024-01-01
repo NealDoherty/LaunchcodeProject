@@ -3,12 +3,9 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { RootObject } from 'src/app/interfaces/recipes';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
-
-
 
 export class SearchRecipesService {
 

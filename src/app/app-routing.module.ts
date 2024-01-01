@@ -22,10 +22,6 @@ const routes: Routes = [
   { 
     path: 'signup', loadChildren: () => import('./components/signup/signup.module').then(m => m.SignupModule) 
   },
-  // {
-  //   path: 'home',
-  //   component: HomeComponent
-  // },
   {
     path: 'pantry',
     component: PantryComponent
