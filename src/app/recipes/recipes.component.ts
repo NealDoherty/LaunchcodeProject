@@ -101,13 +101,14 @@ export class RecipesComponent implements OnInit{
     this.thumbnailURL = selected['thumbnail_url'];
     this.components = [];
     this.sectionDisplay();
-    this.thumbnailURL = selected['thumbnail_url']; 
+    this.thumbnailURL = selected['thumbnail_url']; //Is this redundant?
     this.yieldAmount = selected['yields']; 
     this.cookTime = selected['cook_time_minutes'];
     this.prepTime = selected['prep_time_minutes'];
   }  
 
   //function to retrieve all ingredients from nested JSON object
+  //Should probably rename to make purpose clearer, changed due to html changes
   sectionDisplay():void{   
     for(let section of this.sections)
     {
