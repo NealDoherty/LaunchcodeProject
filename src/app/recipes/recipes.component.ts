@@ -16,7 +16,7 @@ export class RecipesComponent implements OnInit{
 
   recipes;
   recipesString;
-  resultsCount;
+  resultsCount; //appears to be unused. Remove?
 
   // Further dev: Still need to decide on a way to handle the complicated hierarchy of recipe JSON. Difficult
   // to pull out the ingredients from each recipe because it is nested so deep in the object.
@@ -34,6 +34,10 @@ export class RecipesComponent implements OnInit{
   cookTime: object[];
   prepTime: object[];
   
+  //items used to implement favorites
+  recipeID: object[];
+  existingFavorites;
+
 
   user: User = null;
   user_id: string = null;
@@ -74,8 +78,7 @@ export class RecipesComponent implements OnInit{
 
 
   //remove all compilation recipes to improve relevance of search results
-  compilationFilter():void{
-    console.log(this.recipes);
+  compilationFilter():void{   
     
     this.filtered = [];  // not redundant, reset recipes list between searches
   
@@ -101,13 +104,15 @@ export class RecipesComponent implements OnInit{
     this.thumbnailURL = selected['thumbnail_url'];
     this.components = [];
     this.sectionDisplay();
-    this.thumbnailURL = selected['thumbnail_url']; 
+    this.thumbnailURL = selected['thumbnail_url']; //Is this redundant?
     this.yieldAmount = selected['yields']; 
     this.cookTime = selected['cook_time_minutes'];
     this.prepTime = selected['prep_time_minutes'];
+    this.recipeID = selected['id'];
   }  
 
   //function to retrieve all ingredients from nested JSON object
+  //Should probably rename to make purpose clearer. Relevant data is nested in a key value called section and then others called components
   sectionDisplay():void{   
     for(let section of this.sections)
     {
@@ -120,6 +125,26 @@ export class RecipesComponent implements OnInit{
 
   filterResults(filteredRecipes) {
     this.recipes = filteredRecipes;
+  }
+
+  addFavorite():void {
+
+    console.log("enter addfavorites");
+    alert('Recipe Added to Favorites!');
+
+    firebase_service.readCollection('users/dummy_user/favorite_recipes').then(data => {
+      this.existingFavorites = data;
+      console.log("retrieve favorites");
+      console.log(this.existingFavorites);
+
+
+      this.existingFavorites.push(this.recipeID);
+      firebase_service.createCollection('users/dummy_user/favorite_recipes', this.existingFavorites);
+    });    
+
+
+
+    console.log("exit addfavorites");
   }
 
 }
