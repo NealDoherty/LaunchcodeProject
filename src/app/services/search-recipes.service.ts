@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { RootObject } from 'src/app/interfaces/recipes';
+import { RootObject, Result } from 'src/app/interfaces/recipes';
 import { Observable } from 'rxjs';
 
 
@@ -39,6 +39,14 @@ export class SearchRecipesService {
       })
   }
 
+  getRecipesByID(searchTerm): Observable<Result> {
+    return this.http.get<Result>('https://tasty.p.rapidapi.com/recipes/get-more-info', {
+        headers: this.headers,
+        params: new HttpParams()
+        .set("id", searchTerm)               
+      })
+      
+  }
 
 
 };

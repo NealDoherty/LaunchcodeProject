@@ -16,7 +16,7 @@ export class RecipesComponent implements OnInit{
 
   recipes;
   recipesString;
-  resultsCount;
+  resultsCount; //appears to be unused. Remove?
 
   // Further dev: Still need to decide on a way to handle the complicated hierarchy of recipe JSON. Difficult
   // to pull out the ingredients from each recipe because it is nested so deep in the object.
@@ -112,7 +112,7 @@ export class RecipesComponent implements OnInit{
   }  
 
   //function to retrieve all ingredients from nested JSON object
-  //Should probably rename to make purpose clearer, changed due to html changes
+  //Should probably rename to make purpose clearer. Relevant data is nested in a key value called section and then others called components
   sectionDisplay():void{   
     for(let section of this.sections)
     {
