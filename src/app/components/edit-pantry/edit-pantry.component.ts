@@ -28,15 +28,16 @@ export class EditPantryComponent implements OnInit {
   });
 
   //Searches Yummly API to get a list of ingredients based on user's search.
+  //Poorly named, returns items that are either recipes or items
   getRecipes() { 
     this.http.get('https://yummly2.p.rapidapi.com/feeds/auto-complete', {
       headers: this.headers,
       params: new HttpParams()
         .set("q", this.pantrySearchTerm)
     })
-      .subscribe(resp =>
-        this.ingredients = resp['ingredients']
+      .subscribe(resp =>this.ingredients = resp['ingredients']
       );
+
   };
 
   //Function used to update the pantryCollection variable if an object is added/removed. Called within

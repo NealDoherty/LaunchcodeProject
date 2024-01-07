@@ -34,6 +34,10 @@ export class RecipesComponent implements OnInit{
   cookTime: object[];
   prepTime: object[];
   
+  //items used to implement favorites
+  recipeID: object[];
+  existingFavorites;
+
 
   user: User = null;
   user_id: string = null;
@@ -74,8 +78,7 @@ export class RecipesComponent implements OnInit{
 
 
   //remove all compilation recipes to improve relevance of search results
-  compilationFilter():void{
-    console.log(this.recipes);
+  compilationFilter():void{   
     
     this.filtered = [];  // not redundant, reset recipes list between searches
   
@@ -105,6 +108,7 @@ export class RecipesComponent implements OnInit{
     this.yieldAmount = selected['yields']; 
     this.cookTime = selected['cook_time_minutes'];
     this.prepTime = selected['prep_time_minutes'];
+    this.recipeID = selected['id'];
   }  
 
   //function to retrieve all ingredients from nested JSON object
@@ -121,6 +125,26 @@ export class RecipesComponent implements OnInit{
 
   filterResults(filteredRecipes) {
     this.recipes = filteredRecipes;
+  }
+
+  addFavorite():void {
+
+    console.log("enter addfavorites");
+    alert('Recipe Added to Favorites!');
+
+    firebase_service.readCollection('users/dummy_user/favorite_recipes').then(data => {
+      this.existingFavorites = data;
+      console.log("retrieve favorites");
+      console.log(this.existingFavorites);
+
+
+      this.existingFavorites.push(this.recipeID);
+      firebase_service.createCollection('users/dummy_user/favorite_recipes', this.existingFavorites);
+    });    
+
+
+
+    console.log("exit addfavorites");
   }
 
 }
